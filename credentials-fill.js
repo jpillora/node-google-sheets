@@ -3,7 +3,7 @@ const fs = require("fs");
 const readline = require("readline");
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 const question = async text =>
   new Promise((resolve, reject) => {
@@ -18,9 +18,9 @@ const question = async text =>
 // 3. Search "Sheets"
 // 4. Click "Enable"
 // 5. Go to https://console.developers.google.com/apis/credentials/oauthclient
-// 6. IMPORTANT: Choose "Other" and choose a name
-// 8. Should find a form with: Client ID, Client secret
-// 9. Run this script
+// 6. IMPORTANT: Choose "Desktop app" and choose a name
+// 7. Should find a form with: Client ID, Client secret
+// 8. Run this script
 
 async function fill() {
   const clientId = await question("Enter the client ID here: ");
@@ -34,7 +34,7 @@ async function fill() {
   // generate consent page url
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
-    scope: ["https://www.googleapis.com/auth/spreadsheets"]
+    scope: ["https://www.googleapis.com/auth/spreadsheets"],
   });
   // url provides access, then returns a code
   console.log("Visit this url:\n%s", url);
@@ -46,7 +46,7 @@ async function fill() {
   const creds = {
     client_id: clientId,
     client_secret: clientSecret,
-    refresh_token: resp.tokens.refresh_token
+    refresh_token: resp.tokens.refresh_token,
   };
   const str = JSON.stringify(creds, true, 2);
   console.log(`Your 'credentials.json' has been set to: ${str}`);
